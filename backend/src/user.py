@@ -1,3 +1,4 @@
 
 class User():
-    pass
+    def __init__(self, name):
+        self.records = []

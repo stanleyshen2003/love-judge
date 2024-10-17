@@ -203,7 +203,7 @@ frontend/.lock-wscript
 frontend/build/Release
 
 # Dependency directories
-frontend/node_modules/
+*/node_modules/
 frontend/jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -213,7 +213,7 @@ frontend/web_modules/
 frontend/*.tsbuildinfo
 
 # Optional npm cache directory
-frontend/.npm
+*/.npm
 
 # Optional eslint cache
 frontend/.eslintcache
@@ -237,7 +237,7 @@ frontend/*.tgz
 frontend/.yarn-integrity
 
 # dotenv environment variable files
-frontend/.env
+*/.env
 frontend/.env.development.local
 frontend/.env.test.local
 frontend/.env.production.local
