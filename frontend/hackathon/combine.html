@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戀愛裁判 - Love Judge</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .header {
+            background-color: #ff6666;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .intro h1 {
+            font-size: 36px;
+            color: #ff6666;
+        }
+        .intro p {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #666;
+        }
+        .chat-section {
+            width: 90%;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .chat-box {
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 400px;
+            overflow-y: auto;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .chat-message {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .chat-message p {
+            padding: 10px;
+            border-radius: 10px;
+            margin: 0;
+            max-width: 70%;
+        }
+        .chat-message.system p {
+            background-color: #ff6666; /* 系統訊息背景色 */
+            color: white;
+        }
+        .chat-message.user p {
+            background-color: #87CEFA; /* 用戶訊息背景色：淺藍色 */
+            color: white; /* 文字顏色設置為白色 */
+            margin-left: auto; /* 右對齊 */
+        }
+        .input-section {
+            display: flex;
+            margin-top: 20px;
+        }
+        .input-section input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .input-section button {
+            background-color: #ff6666;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        戀愛裁判 - Love Judge
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <h1>戀愛問題解決！</h1>
+            <p>在這裡，你可以盡情發問、分享你的感情故事，讓戀愛裁判來為你裁定！</p>
+        </div>
+        <div class="chat-section">
+            <div class="chat-box" id="chat-box">
+                <!-- 初始的聊天訊息 -->
+                <div class="chat-message system">
+                    <p>歡迎來到戀愛裁判，今天有什麼想聊的呢？</p>
+                </div>
+                <div class="chat-message user">
+                    <p>我最近跟女朋友吵架了 但不知道要怎麼辦...</p>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <input type="text" id="message-input" placeholder="請輸入你的訊息..." onkeydown="checkEnter(event)">
+                <button onclick="sendMessage()">發送</button>
+            </div>
+            
+            <script>
+                // 每次頁面加載時清除 LocalStorage 的聊天訊息
+                window.onload = function() {
+                    clearMessages();
+                };
+
+                // 函數：清除 LocalStorage 的聊天訊息
+                function clearMessages() {
+                    localStorage.removeItem('chatMessages');
+                    // 顯示初始聊天訊息
+                    loadInitialMessages();
+                }
+
+                // 函數：加載初始聊天訊息
+                function loadInitialMessages() {
+                    let chatBox = document.getElementById('chat-box');
+                    chatBox.innerHTML = ''; // 清空聊天框
+
+                    // 加載初始系統訊息
+                    let systemMessage = document.createElement('div');
+                    systemMessage.classList.add('chat-message', 'system');
+                    systemMessage.innerHTML = `<p>歡迎來到戀愛裁判，今天有什麼想聊的呢？</p>`;
+                    chatBox.appendChild(systemMessage);
+                    
+                    // 加載用戶的預設訊息
+                    let userMessage = document.createElement('div');
+                    userMessage.classList.add('chat-message', 'user');
+                    userMessage.innerHTML = `<p>我最近跟女朋友吵架了 但不知道要怎麼辦...</p>`;
+                    chatBox.appendChild(userMessage);
+
+                    // 滾動到最新訊息
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }
+
+                // 函數：發送訊息並顯示在聊天室
+                let isFirstMessage = true; // 記錄是否為第一次發送訊息
+
+                function sendMessage() {
+                    let messageInput = document.getElementById('message-input');
+                    let message = messageInput.value;
+
+                    if (message) {
+                        // 獲取聊天框
+                        let chatBox = document.getElementById('chat-box');
+
+                        // 隱藏初始系統訊息
+                        if (isFirstMessage) {
+                            chatBox.innerHTML = ''; // 清空聊天框
+                            isFirstMessage = false; // 設置為 false，以便下次不再隱藏
+                        }
+
+                        // 如果是第一次發送訊息，顯示系統的回應訊息
+                        if (isFirstMessage) {
+                            let systemMessage = document.createElement('div');
+                            systemMessage.classList.add('chat-message', 'system');
+                            systemMessage.innerHTML = `<p>戀愛裁判幫你解決愛情中的疑難雜症</p>`;
+                            chatBox.appendChild(systemMessage);
+                            isFirstMessage = false; // 設置為 false，以便下次不再顯示
+                        }
+
+                        // 動態顯示用戶的訊息
+                        let messageElement = document.createElement('div');
+                        messageElement.classList.add('chat-message', 'user');
+                        messageElement.innerHTML = `<p>${message}</p>`;
+                        chatBox.appendChild(messageElement);
+
+                        // 清空輸入框
+                        messageInput.value = '';
+
+                        // 滾動到最新訊息
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    }
+                }
+
+                // 檢查 Enter 鍵
+                function checkEnter(event) {
+                    if (event.key === 'Enter') {
+                        sendMessage();
+                    }
+                }
+            </script>
+
+        </div>
+    </div>
+
+</body>
+</html>
