@@ -77,6 +77,13 @@
         }
         .input-section {
             display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 100%;
+        }
+        .input-wrapper {
+            display: flex;
+            width: 100%;
             margin-top: 20px;
         }
         #message-input {
@@ -86,7 +93,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
         }
-        #send-button {
+        #send-button, #lawyer-button {
             padding: 0.5em 1em;
             background-color: #ff6666;
             color: white;
@@ -94,6 +101,11 @@
             border-radius: 4px;
             margin-left: 0.5em;
             cursor: pointer;
+            width: 80px; /* 設定相同寬度 */
+        }
+        #lawyer-button {
+            margin-top: 10px;
+            width: 80px; /* 使按鈕寬度與發送按鈕一致 */
         }
     </style>
 </head>
@@ -116,8 +128,11 @@
             </div>
 
             <div class="input-section">
-                <input type="text" id="message-input" placeholder="輸入訊息...">
-                <button id="send-button">發送</button>
+                <div class="input-wrapper">
+                    <input type="text" id="message-input" placeholder="輸入訊息...">
+                    <button id="send-button">發送</button>
+                </div>
+                <button id="lawyer-button">Lawyer</button>
             </div>
         </div>
     </div>
@@ -127,6 +142,7 @@
         const chatBox = document.getElementById('chat-box');
         const messageInput = document.getElementById('message-input');
         const sendButton = document.getElementById('send-button');
+        const lawyerButton = document.getElementById('lawyer-button');
 
         function addMessage(message, isSelf) {
             const messageElement = document.createElement('div');
@@ -143,6 +159,11 @@
                 socket.emit('chat message', { text: message, sender: 'girl' });
                 messageInput.value = '';
             }
+        });
+
+        lawyerButton.addEventListener('click', () => {
+            const message = "Lawyer has been called!";
+            socket.emit('chat message', { text: message, sender: 'lawyer' });
         });
 
         messageInput.addEventListener('keypress', (e) => {
