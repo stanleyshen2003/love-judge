@@ -111,13 +111,14 @@
 </head>
 <body>
     <div class="header">
-        戀愛裁判 - Love Judge (女生版)
+        房間 ID: <span id="room-id-display"></span>
     </div>
 
     <div class="container">
         <div class="intro">
             <h1>戀愛問題解決！</h1>
             <p>在這裡，你可以盡情發問、分享你的感情故事，讓戀愛裁判來為你裁定！</p>
+            <p>你好，<span id="name-display"></span>！</p>
         </div>
 
         <div class="chat-section">
@@ -138,42 +139,62 @@
     </div>
 
     <script>
+        // 取得 URL 中的參數
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomId = urlParams.get('roomId');
+        const name = urlParams.get('name');
+
+        // 將房間ID和名字顯示在頁面上
+        document.getElementById('room-id-display').textContent = roomId;
+        document.getElementById('name-display').textContent = name;
+
         const socket = io();
         const chatBox = document.getElementById('chat-box');
         const messageInput = document.getElementById('message-input');
         const sendButton = document.getElementById('send-button');
         const lawyerButton = document.getElementById('lawyer-button');
 
-        function addMessage(message, isSelf) {
+        // 顯示訊息的函數
+        function addMessage(message, senderName, isSelf) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message');
             messageElement.classList.add(isSelf ? 'user' : 'other');
-            messageElement.textContent = message;
+            messageElement.textContent = `${senderName}: ${message}`;  // 顯示發送者名稱
             chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight;
+            chatBox.scrollTop = chatBox.scrollHeight;  // 自動捲動到最新訊息
         }
 
+        // 當使用者點擊發送按鈕
         sendButton.addEventListener('click', () => {
             const message = messageInput.value.trim();
             if (message) {
-                socket.emit('chat message', { text: message, sender: 'girl' });
-                messageInput.value = '';
+                // 發送訊息，包含使用者名稱
+                socket.emit('chat message', { text: message, sender: 'girl', name: name });
+                addMessage(message, name, true);  // 顯示自己發送的訊息
+                messageInput.value = '';  // 清空輸入欄
             }
         });
 
+        // 當使用者點擊 Lawyer 按鈕
         lawyerButton.addEventListener('click', () => {
             const message = "Lawyer has been called!";
-            socket.emit('chat message', { text: message, sender: 'lawyer' });
+            socket.emit('chat message', { text: message, sender: 'lawyer', name: name });
         });
 
+        // 允許按下 Enter 鍵發送訊息
         messageInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 sendButton.click();
             }
         });
 
+         // 當接收到新的聊天訊息
         socket.on('chat message', (msg) => {
-            addMessage(msg.text, msg.sender === 'girl');
+         // 如果發送者名稱與當前使用者名稱相同，則不顯示
+         if (msg.name !== name) {
+        // 顯示其他人發送的訊息，顯示名稱
+        addMessage(msg.text, msg.name, false);
+            }
         });
     </script>
 </body>

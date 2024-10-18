@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戀愛裁判 - 登入</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            color: #ff6666;
+        }
+        label {
+            font-size: 16px;
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #ff6666;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e65555;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>戀愛裁判 - 登入</h1>
+        <form id="login-form">
+            <label for="room-id">房間 ID:</label>
+            <input type="text" id="room-id" required>
+            
+            <label for="name">你的名字:</label>
+            <input type="text" id="name" required>
+            
+            <label for="gender">性別:</label>
+            <select id="gender" required>
+                <option value="boy">Boy</option>
+                <option value="girl">Girl</option>
+            </select>
+          
+            <button type="submit">進入房間</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();  // 防止表單自動提交
+
+            const roomId = document.getElementById('room-id').value.trim();
+            const name = document.getElementById('name').value.trim();
+            const gender = document.getElementById('gender').value;
+
+            if (roomId && name && gender) {
+                // 根據性別跳轉到不同頁面，並攜帶房間ID與姓名資訊
+                const url = gender === 'boy' ? 'testboy.html' : 'testgirl.html';
+                window.location.href = `${url}?roomId=${roomId}&name=${name}`;
+            }
+        });
+    </script>
+</body>
+</html>
