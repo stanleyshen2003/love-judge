@@ -18,10 +18,11 @@ class User():
         self.lawyer_new_info.append(self.name + ": " + message)
     
   
-    def ask_lawyer(self, message):
+    def ask_lawyer(self, message, user):
         if len(self.lawyer_new_info) > 0:
             self.lawyer.insert_record(self.lawyer_new_info)
             self.lawyer_new_info = []
+        self.lawyer_records.append({"text": message, "sender": user})
         self.lawyer_records.append({"text": self.lawyer.query(message), "sender": "lawyer"})
         self.lawyer_new_info = []
         return self.lawyer_records

@@ -33,6 +33,6 @@ class HttpInterface:
         message = data['message']
         
         if sender == 'boy':
-            return self.court.boy.ask_lawyer(message)
+            return self.court.boy.ask_lawyer(message, sender)
         else:
-            return self.court.girl.ask_lawyer(message)
+            return self.court.girl.ask_lawyer(message, sender)
