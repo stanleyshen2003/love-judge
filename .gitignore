@@ -292,3 +292,5 @@ frontend/.yarn/unplugged
 frontend/.yarn/build-state.yml
 frontend/.yarn/install-state.gz
 frontend/.pnp.*
+
+*__pycache__*
