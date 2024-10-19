@@ -26,6 +26,22 @@ def get():
     ret = interface.get({'sender': user})
     return jsonify(ret), 200
 
+@app.route('/lawyer', methods=['POST'])
+def index():
+    data = request.get_json()
+    if data:
+        ret = interface.post_lawyer(data)
+        return jsonify(ret), 200
+    else:
+        return jsonify({"message": "Received a POST request with no data"}), 400
+    
+@app.route('/lawyer', methods=['GET'])
+def get():
+    user = request.args.get('user')
+    ret = interface.get_lawyer(user)
+    return jsonify(ret), 200
+
+
 # Run the Flask app
 if __name__ == '__main__':
     # load_dotenv()

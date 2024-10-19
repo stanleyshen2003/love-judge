@@ -21,3 +21,18 @@ class HttpInterface:
         else:
             records = self.court.girl.filtered_records
         return {"messages": records, "type": sender}
+    
+    def get_lawyer(self, user):
+        if user == 'boy':
+            return self.court.boy.lawyer_records
+        else:
+            return self.court.girl.lawyer_records
+    
+    def post_lawyer(self, data):
+        sender = data['sender']
+        message = data['message']
+        
+        if sender == 'boy':
+            return self.court.boy.ask_lawyer(message)
+        else:
+            return self.court.girl.ask_lawyer(message)

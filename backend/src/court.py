@@ -50,6 +50,12 @@ class Court():
             self.girl_done = False
             self.boy_done = False
             self.stage += 1
+        elif self.stages[self.stage] == "analyze":
+            ## TBD ---------------------------------------------------------
+            analyze_message = [mes['sender'] + ": " + mes['text'] for mes in self.message_recieved]
+            analyze_message = "\n".join(analyze_message)
+            analysis = self.summarizer.prompt_once("\n".join(analyze_message))
+            self.message_recieved.append({'text': analysis, 'sender': 'judge'})
         
         if user == 'boy':
             return self.boy.filtered_records
