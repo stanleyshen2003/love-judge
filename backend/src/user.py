@@ -10,7 +10,8 @@ class User():
         
         system_instruction_lawyer = self.prompts.get_prompt('lawyer')
         self.lawyer = Gemini(system_instruction=system_instruction_lawyer, project=project)
-        self.lawyer_records = []
+        init_mes = self.prompts.get_prompt('lawyer_' + name)
+        self.lawyer_records = [{'text': init_mes, 'sender': 'lawyer'}]
         self.lawyer_new_info = []
         
     def message_append(self, message, user):
