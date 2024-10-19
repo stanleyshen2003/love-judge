@@ -27,7 +27,7 @@ def get():
     return jsonify(ret), 200
 
 @app.route('/lawyer', methods=['POST'])
-def index():
+def post_lawyer():
     data = request.get_json()
     if data:
         ret = interface.post_lawyer(data)
@@ -36,7 +36,7 @@ def index():
         return jsonify({"message": "Received a POST request with no data"}), 400
     
 @app.route('/lawyer', methods=['GET'])
-def get():
+def get_lawyer():
     user = request.args.get('user')
     ret = interface.get_lawyer(user)
     return jsonify(ret), 200
