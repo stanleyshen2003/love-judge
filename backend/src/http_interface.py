@@ -8,7 +8,7 @@ class HttpInterface:
 
     def post(self, data):
         sender = data['sender']
-        message = data['messages']
+        message = data['message']
         records = self.court.message_in(user=sender, message=message)
         print(records)
         return {"messages": records, "type": sender}
