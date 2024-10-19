@@ -47,6 +47,8 @@ class Court():
             self.message_recieved.append(summary)
             self.boy.message_append(summary, user='judge')
             self.girl.message_append(summary, user='judge')
+            self.girl_done = False
+            self.boy_done = False
             self.stage += 1
         
         if user == 'boy':
