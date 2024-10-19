@@ -99,16 +99,20 @@ function Chat() {
                                 avatar = judgeAvatar;
                             }
 
+                            // 确定消息的样式类名
+                            let messageClass = '';
+                            if (msg.sender === 'system') {
+                                messageClass = 'system';
+                            } else if (msg.sender === gender) {
+                                messageClass = 'user';
+                            } else if (msg.sender === 'judge') {
+                                messageClass = 'judge';
+                            } else {
+                                messageClass = 'other';
+                            }
+
                             return (
-                                <div
-                                    key={index}
-                                    className={`chat-message ${msg.sender === 'system'
-                                            ? 'system'
-                                            : msg.sender === gender
-                                                ? 'user'
-                                                : 'other'
-                                        }`}
-                                >
+                                <div key={index} className={`chat-message ${messageClass}`}>
                                     {msg.sender !== 'system' && msg.sender !== gender && avatar && (
                                         <img src={avatar} alt={`${msg.sender} avatar`} className="avatar" />
                                     )}
