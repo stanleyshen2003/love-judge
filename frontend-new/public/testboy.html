@@ -175,10 +175,9 @@
             }
         });
 
-        // 當使用者點擊 Lawyer 按鈕
+        // 當使用者點擊 Lawyer 按鈕時跳轉到 lawyer.html
         lawyerButton.addEventListener('click', () => {
-            const message = "Lawyer has been called!";
-            socket.emit('chat message', { text: message, sender: 'lawyer', name: name });
+            window.location.href = `lawyer.html?roomId=${roomId}&name=${name}`;
         });
 
         // 允許按下 Enter 鍵發送訊息
@@ -188,12 +187,12 @@
             }
         });
 
-         // 當接收到新的聊天訊息
-       socket.on('chat message', (msg) => {
-         // 如果發送者名稱與當前使用者名稱相同，則不顯示
-         if (msg.name !== name) {
-        // 顯示其他人發送的訊息，顯示名稱
-        addMessage(msg.text, msg.name, false);
+        // 當接收到新的聊天訊息
+        socket.on('chat message', (msg) => {
+            // 如果發送者名稱與當前使用者名稱相同，則不顯示
+            if (msg.name !== name) {
+                // 顯示其他人發送的訊息，顯示名稱
+                addMessage(msg.text, msg.name, false);
             }
         });
 
