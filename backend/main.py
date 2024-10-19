@@ -31,4 +31,4 @@ def index():
 if __name__ == '__main__':
     # load_dotenv()
     # GCP_PROJECT_ID = os.getenv('GCP_PROJECT_ID')
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
