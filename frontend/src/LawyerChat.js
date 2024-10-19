@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LawyerChat.css';
+import boyAvatar from './assets/boy.png';
+import girlAvatar from './assets/girl.png';
+import lawyerAvatar from './assets/lawyer.png';
 
 function LawyerChat() {
     const [roomId, setRoomId] = useState('');
     const [username, setUsername] = useState('');
     const [gender, setGender] = useState('');
-    const [messages, setMessages] = useState([
-        { text: '歡迎來到律師聊天室，有什麼想詢問的呢？', sender: 'system' },
-    ]);
+    const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState('');
     const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ function LawyerChat() {
     // 定期获取消息
     useEffect(() => {
         const interval = setInterval(() => {
-            fetch(`http://35.194.188.10:5000/?user=${gender}`, {
+            fetch(`http://35.236.145.95:5000/lawyer?user=${gender}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -50,13 +51,10 @@ function LawyerChat() {
         if (message) {
             const payload = {
                 sender: gender, // 使用性别作为发送者
-                messages: {
-                    sender: gender, // 使用性别作为发送者
-                    text: message,
-                },
+                message: message,
             };
 
-            fetch('http://35.194.188.10:5000/', {
+            fetch('http://35.236.145.95:5000/lawyer', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
@@ -94,22 +92,38 @@ function LawyerChat() {
 
                 <div className="chat-section">
                     <div id="chat-box" className="chat-box">
-                        {messages.map((msg, index) => (
-                            <div
-                                key={index}
-                                className={`chat-message ${msg.sender === 'system'
-                                    ? 'system'
-                                    : msg.sender === gender
-                                        ? 'user'
-                                        : 'other'
-                                    }`}
-                            >
-                                {msg.sender !== 'system' && msg.sender !== gender
-                                    ? `${msg.sender}: `
-                                    : ''}
-                                {msg.text}
-                            </div>
-                        ))}
+                        {messages.map((msg, index) => {
+                            // 确定头像图片
+                            let avatar = null;
+                            if (msg.sender === 'boy') {
+                                avatar = boyAvatar;
+                            } else if (msg.sender === 'girl') {
+                                avatar = girlAvatar;
+                            } else if (msg.sender === 'lawyer') {
+                                avatar = lawyerAvatar;
+                            }
+
+                            // 确定消息的样式类名
+                            let messageClass = '';
+                            if (msg.sender === 'system') {
+                                messageClass = 'system';
+                            } else if (msg.sender === gender) {
+                                messageClass = 'user';
+                            } else {
+                                messageClass = 'other';
+                            }
+
+                            return (
+                                <div key={index} className={`chat-message ${messageClass}`}>
+                                    {msg.sender !== 'system' && msg.sender !== gender && avatar && (
+                                        <img src={avatar} alt={`${msg.sender} avatar`} className="avatar" />
+                                    )}
+                                    <div className="message-content">
+                                        {msg.text || msg.message}
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
 
                     <div className="input-section">

@@ -31,7 +31,7 @@ function Chat() {
     // 定期获取消息
     useEffect(() => {
         const interval = setInterval(() => {
-            fetch(`http://35.194.188.10:5000/?user=${gender}`, {
+            fetch(`http://35.236.145.95:5000/?user=${gender}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -55,7 +55,7 @@ function Chat() {
                 message: message,
             };
 
-            fetch('http://35.194.188.10:5000/', {
+            fetch('http://35.236.145.95:5000/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
@@ -117,9 +117,6 @@ function Chat() {
                                         <img src={avatar} alt={`${msg.sender} avatar`} className="avatar" />
                                     )}
                                     <div className="message-content">
-                                        {msg.sender !== 'system' && msg.sender !== gender
-                                            ? `${msg.sender}: `
-                                            : ''}
                                         {msg.text || msg.message}
                                     </div>
                                 </div>
