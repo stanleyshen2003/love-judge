@@ -13,8 +13,8 @@ class User():
         self.lawyer_records = []
         self.lawyer_new_info = []
         
-    def message_append(self, message):
-        self.filtered_records.append({'text': message, 'sender': self.name})
+    def message_append(self, message, user):
+        self.filtered_records.append({'text': message, 'sender': user})
         self.lawyer_new_info.append(self.name + ": " + message)
     
   

@@ -25,12 +25,12 @@ class Court():
     def message_in(self, user, message):
         filtered_message = self.tone_correction.prompt_once(message)
         if user == 'boy':
-            self.boy.message_append(message=message)
-            self.girl.message_append(message=filtered_message)
+            self.boy.message_append(message=message, user=user)
+            self.girl.message_append(message=filtered_message, user=user)
             self.boy_done = True
         else:
-            self.boy.message_append(message=filtered_message)
-            self.girl.message_append(message=message)
+            self.boy.message_append(message=filtered_message, user=user)
+            self.girl.message_append(message=message, user=user)
             self.girl_done = True
         
         self.message_recieved.append({'text': message, 'sender': user})
