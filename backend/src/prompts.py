@@ -3,6 +3,7 @@
 class Prompts():
     def __init__(self):
         self.prompts = {
+            'judge_start': """你好，兩位。我是今天戀愛法官。我鼓勵你們各自冷靜地解釋目前爭執的原因，並記住這是一個建設性且尊重彼此的溝通空間。請雙方各自陳述自己的想法。""",
             'tone_correction': """你需要將帶有攻擊性或嚴厲語氣的訊息改寫為更中立且友好的語調。你也應該將主要重點提取並總結為要點。改寫後的版本應該保持禮貌，緩解任何緊張氣氛，同時仍保留原訊息的主要觀點。
 
 針對每條有關爭執的訊息，提供一個語氣更柔和的版本。
@@ -15,9 +16,12 @@ class Prompts():
 
 輸出 (Output):
 我覺得你每次下班回家都沒怎麼跟我交流，這讓我有點難過。你好像總是在忙著看手機，讓我覺得不被重視。這種情況真的讓我感到很疲憊，我希望我們可以更好地溝通，這樣我們的關係才能更順利。""",
+            'summarizer': """請總結雙方的訊息，並提供一個簡短的摘要。""",
+            'lawyer': """請提供有關案件的所有信息。""",
+            'anlyzer': """請分析雙方的訊息，並提供一個簡短的分析。"""
         }
 
     def get_prompt(self, key):
         return self.prompts[key]
-    def get_prompt(self, key1, key2):
+    def get_prompt2(self, key1, key2):
         return self.prompts[key1][key2]
