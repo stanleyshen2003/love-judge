@@ -28,10 +28,25 @@ function Chat() {
         }
     }, [navigate]);
 
+    useEffect(() => {
+        // This effect will run only once on initial render
+        fetch(`http://127.0.0.1:5000/?user=${gender}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setMessages(data.messages);
+            })
+            .catch((error) => {
+                console.error('Error fetching messages:', error);
+            });
+        }, []);
+
     // 定期获取消息
     useEffect(() => {
         const interval = setInterval(() => {
-            fetch(`http://35.236.145.95:5000/?user=${gender}`, {
+            fetch(`http://127.0.0.1:5000/?user=${gender}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -54,15 +69,17 @@ function Chat() {
                 sender: gender, // 使用性别作为发送者
                 message: message,
             };
-
-            fetch('http://35.236.145.95:5000/', {
+            const newMessages = [...messages, payload];
+            setMessages(newMessages);
+            setMessageInput('');
+            fetch('http://127.0.0.1:5000/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    setMessageInput('');
+                    // setMessageInput('');
                     setMessages(data.messages);
                 })
                 .catch((error) => {

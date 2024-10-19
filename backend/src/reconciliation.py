@@ -4,7 +4,7 @@ from vertexai.preview import rag
 import vertexai
 
 class ReconciliationAgent:
-    def __init__(self, project_id, location=None):
+    def __init__(self, project_id, location='asia-east1'):
         self.project_id = project_id
         self.location = location or os.environ.get("GOOGLE_CLOUD_REGION", "us-central1")
         vertexai.init(project=self.project_id, location=self.location)

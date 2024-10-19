@@ -8,7 +8,7 @@ class User():
         self.prompts = Prompts()
         self.filtered_records.append({'text':self.prompts.get_prompt('judge_start'), 'sender':'judge'})
         
-        system_instruction_lawyer = self.prompts.get_prompt('lawyer')
+        system_instruction_lawyer = self.prompts.get_prompt('lawyer_' + name  + '_sys')
         self.lawyer = Lawyer(system_instruction=system_instruction_lawyer, project=project)
         init_mes = self.prompts.get_prompt('lawyer_' + name)
         self.lawyer_records = [{'text': init_mes, 'sender': 'lawyer'}]
