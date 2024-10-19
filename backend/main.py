@@ -6,7 +6,7 @@ from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 # GCP_PROJECT_ID = None
 interface = HttpInterface(project="semiotic-effort-439102-k9")
 
