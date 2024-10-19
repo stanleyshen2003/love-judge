@@ -54,7 +54,7 @@ class Lawyer(Gemini):
         super().__init__(system_instruction, project, location, model_name, mode)
     
     def insert_record(self, record):
-        non = self.chat.query("Information: \n" + "\n".join(record))
+        non = self.query("Information: \n" + "\n".join(record))
 
 
 
