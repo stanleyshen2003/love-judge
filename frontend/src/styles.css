@@ -1,20 +1,22 @@
-/* 容器样式 */
+/* styles.css */
+
+/* Container styles */
 .chat-container {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     color: #333;
 }
 
-/* 头部样式 */
 .header {
-    background-color: #ff6666;
+    background-color: #5271ff;
+    /* You can adjust this color if needed */
     padding: 20px;
     text-align: center;
     color: white;
     font-size: 24px;
 }
 
-/* 内容区域样式 */
+/* Content area styles */
 .content {
     display: flex;
     flex-direction: column;
@@ -22,11 +24,10 @@
     margin-top: 15px;
 }
 
-/* 介绍部分样式 */
 .intro {
     text-align: center;
     font-size: 20px;
-    color: #ff6666;
+    color: #5271ff;
 }
 
 .intro p {
@@ -35,7 +36,7 @@
     color: #666;
 }
 
-/* 聊天区域样式 */
+/* Chat section styles */
 .chat-section {
     width: 90%;
     max-width: 500px;
@@ -53,33 +54,68 @@
     padding: 1em;
 }
 
+/* Adjusting the base style for .chat-message */
 .chat-message {
+    display: flex;
+    align-items: center;
     padding: 10px;
     border-radius: 10px;
     margin: 10px 0;
     max-width: 70%;
 }
 
-.chat-message.system {
-    background-color: #ff6666;
-    color: white;
-    margin: 0 auto;
-    text-align: center;
-}
-
+/* Self messages (sent by the user) */
 .chat-message.user {
-    background-color: #87CEFA;
+    background-color: #5271ff;
+    /* Background color #5271ff */
     color: white;
+    /* Text color white */
     margin-left: auto;
 }
 
+/* Messages from others */
 .chat-message.other {
-    background-color: #ffccdd;
-    color: white;
+    background-color: #d9d9d9;
+    /* Background color #d9d9d9 */
+    color: black;
+    /* Text color black */
     margin-right: auto;
 }
 
-/* 输入区域样式 */
+/* Messages from the judge */
+.chat-message.judge {
+    background-color: #c9d5ef;
+    /* Background color #c9d5ef */
+    color: black;
+    /* Text color black */
+    margin-right: auto;
+}
+
+/* System messages (if any) */
+.chat-message.system {
+    background-color: #ff6666;
+    /* Adjust as needed */
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Avatar styles */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Message content styles */
+.message-content {
+    background-color: inherit;
+    color: inherit;
+}
+
+/* Input section styles */
 .input-section {
     display: flex;
     flex-direction: column;
@@ -103,7 +139,7 @@
 
 #send-button {
     padding: 0.5em 1em;
-    background-color: #ff6666;
+    background-color: #5271ff;
     color: white;
     border: none;
     border-radius: 4px;
@@ -114,58 +150,11 @@
 
 #lawyer-button {
     background-color: white;
-    color: #ff6666;
+    color: #5271ff;
     padding: 10px;
-    border: 2px solid #ff6666;
+    border: 2px solid #5271ff;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
     width: 80px;
-}
-
-/* 头像样式 */
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-/* 消息内容样式 */
-.message-content {
-    background-color: inherit;
-    color: inherit;
-}
-
-/* 调整 .chat-message 的样式 */
-.chat-message {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 10px 0;
-    max-width: 70%;
-}
-
-/* 其他用户的消息样式 */
-.chat-message.other {
-    background-color: #ffccdd;
-    color: white;
-    margin-right: auto;
-}
-
-/* 当前用户的消息样式 */
-.chat-message.user {
-    background-color: #87CEFA;
-    color: white;
-    margin-left: auto;
-}
-
-/* 系统消息样式 */
-.chat-message.system {
-    background-color: #ff6666;
-    color: white;
-    margin: 0 auto;
-    text-align: center;
-    display: inline-block;
 }
