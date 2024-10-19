@@ -1,4 +1,4 @@
-from .gemini import Gemini
+from .gemini import Gemini, Lawyer
 from .prompts import Prompts
 
 class User():
@@ -9,7 +9,7 @@ class User():
         self.filtered_records.append({'text':self.prompts.get_prompt('judge_start'), 'sender':'judge'})
         
         system_instruction_lawyer = self.prompts.get_prompt('lawyer')
-        self.lawyer = Gemini(system_instruction=system_instruction_lawyer, project=project)
+        self.lawyer = Lawyer(system_instruction=system_instruction_lawyer, project=project)
         init_mes = self.prompts.get_prompt('lawyer_' + name)
         self.lawyer_records = [{'text': init_mes, 'sender': 'lawyer'}]
         self.lawyer_new_info = []
