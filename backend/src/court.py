@@ -40,7 +40,10 @@ class Court():
         
         if self.stages[self.stage] == "summarize":
             ## TBD ---------------------------------------------------------
-            summary = self.summarizer.prompt_once(self.message_recieved)
+            summarize_message = [mes['sender'] + ": " + mes['text'] for mes in self.message_recieved]
+            summarize_message = "\n".join(summarize_message)
+            print(summarize_message)
+            summary = self.summarizer.prompt_once("\n".join(summarize_message))
             self.message_recieved.append(summary)
             self.boy.message_append({'text': summary, 'sender':'judge'})
             self.girl.message_append({'text': summary, 'sender':'judge'})
