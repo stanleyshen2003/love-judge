@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 from src.http_interface import HttpInterface
 import os
+from flask_cors import CORS
 # from dotenv import load_dotenv
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)
 # GCP_PROJECT_ID = None
 interface = HttpInterface(project="semiotic-effort-439102-k9")
 
