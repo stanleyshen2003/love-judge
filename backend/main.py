@@ -11,23 +11,20 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 interface = HttpInterface(project="semiotic-effort-439102-k9")
 
 # Route for handling GET and POST requests
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
 def index():
-    if request.method == 'GET':
-        # Handle GET request
-        data = request.get_json()
-        if data:
-            ret = interface.get(data)
-            return jsonify(ret), 200
-        else:
-            return "Received a GET request!", 200
-    elif request.method == 'POST':
-        data = request.get_json()
-        if data:
-            ret = interface.post(data)
-            return jsonify(ret), 200
-        else:
-            return jsonify({"message": "Received a POST request with no data"}), 400
+    data = request.get_json()
+    if data:
+        ret = interface.post(data)
+        return jsonify(ret), 200
+    else:
+        return jsonify({"message": "Received a POST request with no data"}), 400
+    
+@app.route('/', methods=['GET'])
+def get():
+    user = request.args.get('user')
+    ret = interface.get({'sender': user})
+    return jsonify(ret), 200
 
 # Run the Flask app
 if __name__ == '__main__':
