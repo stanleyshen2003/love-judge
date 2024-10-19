@@ -45,8 +45,8 @@ class Court():
             print(summarize_message)
             summary = self.summarizer.prompt_once("\n".join(summarize_message))
             self.message_recieved.append(summary)
-            self.boy.message_append({'text': summary, 'sender':'judge'})
-            self.girl.message_append({'text': summary, 'sender':'judge'})
+            self.boy.message_append(summary, user='judge')
+            self.girl.message_append(summary, user='judge')
             self.stage += 1
         
         if user == 'boy':
