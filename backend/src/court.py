@@ -16,7 +16,7 @@ class Court():
             4: "boy_girl",
             5: "analyze",
         }
-        self.message_recieved = []
+        self.message_recieved = [{'text':self.prompts.get_prompt('judge_start'), 'sender':'judge'}]
         self.boy = User(name="boy", project=project)
         self.girl = User(name="girl", project=project)
         self.girl_done = False
@@ -44,7 +44,7 @@ class Court():
             summarize_message = "\n".join(summarize_message)
             print(summarize_message)
             summary = self.summarizer.prompt_once("\n".join(summarize_message))
-            self.message_recieved.append(summary)
+            self.message_recieved.append({'text': summary, 'sender': 'judge'})
             self.boy.message_append(summary, user='judge')
             self.girl.message_append(summary, user='judge')
             self.girl_done = False
