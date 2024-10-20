@@ -59,8 +59,8 @@ class Court():
             analyze_message = "\n".join(analyze_message)
             analysis = self.anaylzer.prompt_once(analyze_message)
             self.message_recieved.append({'text': analysis, 'sender': 'judge'})
-            self.boy.message_append(summary, user='judge')
-            self.girl.message_append(summary, user='judge')
+            self.boy.message_append(analysis, user='judge')
+            self.girl.message_append(analysis, user='judge')
             
             analyze_message = [mes['sender'] + ": " + mes['text'] for mes in self.message_recieved]
             analyze_message = "\n".join(analyze_message)

@@ -75,7 +75,7 @@ class ReconciliationAgent:
     def get_reconciliation_advice(self, context):
         prompt = f"Based on the following context, provide specific reconciliation advice: {context}"
         response = self.rag_gemini_model.generate_content(prompt)
-        return response.text
+        return response.text.replace("*", "").rstrip()
 
     def analyze_conflict(self, conflict_description):
         prompt = f"Analyze the following conflict and provide insights: {conflict_description}"
