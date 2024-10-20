@@ -30,7 +30,7 @@ function Chat() {
 
     useEffect(() => {
         // This effect will run only once on initial render
-        fetch(`http://127.0.0.1:5000/?user=${gender}`, {
+        fetch(`http://35.236.145.95:5000/?user=${gender}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         })
@@ -46,7 +46,7 @@ function Chat() {
     // 定期获取消息
     useEffect(() => {
         const interval = setInterval(() => {
-            fetch(`http://127.0.0.1:5000/?user=${gender}`, {
+            fetch(`http://35.236.145.95:5000/?user=${gender}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -72,7 +72,7 @@ function Chat() {
             const newMessages = [...messages, payload];
             setMessages(newMessages);
             setMessageInput('');
-            fetch('http://127.0.0.1:5000/', {
+            fetch('http://35.236.145.95:5000/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
