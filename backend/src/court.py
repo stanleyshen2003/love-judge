@@ -1,12 +1,15 @@
 from .gemini import Gemini
 from .prompts import Prompts
 from .user import User
+from .reconciliation import ReconciliationAgent
 
 class Court():
     def __init__(self, project):
         self.prompts = Prompts()
         self.tone_correction = Gemini(system_instruction=self.prompts.get_prompt('tone_correction'), project=project)
         self.summarizer = Gemini(system_instruction=self.prompts.get_prompt('summarizer'), project=project)
+        self.anaylzer = Gemini(system_instruction=self.prompts.get_prompt('analyzer'), project=project)
+        self.reconcil = ReconciliationAgent(project_id=project)
         self.stage = 0
         self.stages = {
             0: "boy_girl",
@@ -54,8 +57,18 @@ class Court():
             ## TBD ---------------------------------------------------------
             analyze_message = [mes['sender'] + ": " + mes['text'] for mes in self.message_recieved]
             analyze_message = "\n".join(analyze_message)
-            analysis = self.summarizer.prompt_once("\n".join(analyze_message))
+            analysis = self.anaylzer.prompt_once(analyze_message)
             self.message_recieved.append({'text': analysis, 'sender': 'judge'})
+            self.boy.message_append(summary, user='judge')
+            self.girl.message_append(summary, user='judge')
+            
+            analyze_message = [mes['sender'] + ": " + mes['text'] for mes in self.message_recieved]
+            analyze_message = "\n".join(analyze_message)
+            advice = self.reconcil.get_reconciliation_advice(analyze_message)
+            self.message_recieved.append({'text': advice, 'sender': 'judge'})
+            self.boy.message_append(advice, user='judge')
+            self.girl.message_append(advice, user='judge')           
+            
         
         if user == 'boy':
             return self.boy.filtered_records

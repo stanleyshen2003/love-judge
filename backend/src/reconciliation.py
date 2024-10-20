@@ -14,7 +14,7 @@ class ReconciliationAgent:
         self.rag_gemini_model = self._create_gemini_model()
 
     def _load_corpus_name(self):
-        with open("rag_corpus_names.txt", "r") as f:
+        with open("src/rag_corpus_names.txt", "r") as f:
             for line in f:
                 if line.startswith("Reconciliation Corpus:"):
                     return line.split(":")[1].strip()
