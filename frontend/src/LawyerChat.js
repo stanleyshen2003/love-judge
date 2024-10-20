@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './LawyerChat.css';
+import './LawyerChat.css'; // 确保引用了正确的 CSS 文件
 import boyAvatar from './assets/boy.png';
 import girlAvatar from './assets/girl.png';
 import lawyerAvatar from './assets/lawyer.png';
@@ -27,26 +27,10 @@ function LawyerChat() {
         }
     }, [navigate]);
 
-    useEffect(() => {
-        // This effect will run only once on initial render
-        fetch(`http://35.236.145.95:5000/?user=${gender}`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setMessages(data.messages);
-            })
-            .catch((error) => {
-                console.error('Error fetching messages:', error);
-            });
-    }, []);
-
-
     // 定期获取消息
     useEffect(() => {
         const interval = setInterval(() => {
-            fetch(`http://35.236.145.95:5000/lawyer?user=${gender}`, {
+            fetch(`http://35.194.188.10:5000/?user=${gender}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -70,10 +54,7 @@ function LawyerChat() {
                 message: message,
             };
 
-            const newMessages = [...messages, payload];
-            setMessages(newMessages);
-
-            fetch('http://35.236.145.95:5000/lawyer', {
+            fetch('http://35.194.188.10:5000/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
@@ -99,8 +80,8 @@ function LawyerChat() {
 
             <div className="container">
                 <div className="intro">
-                    <h1>律師聊天室</h1>
-                    <p>暢談你心中的不快</p>
+                    <h1>{gender === 'boy' ? '兄弟' : gender === 'girl' ? '閨蜜' : '律師'}聊天室</h1>
+                    <p>與{gender === 'boy' ? '兄弟' : gender === 'girl' ? '閨蜜' : '律師'}討論你的問題！</p>
                 </div>
 
                 <div className="chat-section">
@@ -155,7 +136,11 @@ function LawyerChat() {
                                 發送
                             </button>
                         </div>
-                        <button id="back-button" onClick={handleBack}>
+                        <button
+                            className="back-button"
+                            id="back-button"
+                            onClick={handleBack}
+                        >
                             返回
                         </button>
                     </div>

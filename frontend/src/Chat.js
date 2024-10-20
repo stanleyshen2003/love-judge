@@ -28,25 +28,10 @@ function Chat() {
         }
     }, [navigate]);
 
-    useEffect(() => {
-        // This effect will run only once on initial render
-        fetch(`http://35.236.145.95:5000/?user=${gender}`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setMessages(data.messages);
-            })
-            .catch((error) => {
-                console.error('Error fetching messages:', error);
-            });
-    }, []);
-
     // 定期获取消息
     useEffect(() => {
         const interval = setInterval(() => {
-            fetch(`http://35.236.145.95:5000/?user=${gender}`, {
+            fetch(`http://35.194.188.10:5000/?user=${gender}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -69,17 +54,15 @@ function Chat() {
                 sender: gender, // 使用性别作为发送者
                 message: message,
             };
-            const newMessages = [...messages, payload];
-            setMessages(newMessages);
-            setMessageInput('');
-            fetch('http://35.236.145.95:5000/', {
+
+            fetch('http://35.194.188.10:5000/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    // setMessageInput('');
+                    setMessageInput('');
                     setMessages(data.messages);
                 })
                 .catch((error) => {
@@ -94,11 +77,11 @@ function Chat() {
 
     return (
         <div className="chat-container">
-
             <div className="content">
                 <div className="intro">
                     <h1>戀愛問題解決！</h1>
-                    <p>說說你們的問題吧～</p>
+                    <p>客觀表達自己看法</p>
+
                 </div>
                 {/* 聊天区域 */}
                 <div className="chat-section">
@@ -138,7 +121,6 @@ function Chat() {
                             );
                         })}
                     </div>
-
                     <div className="input-section">
                         <div className="input-wrapper">
                             <input
@@ -156,7 +138,7 @@ function Chat() {
                             </button>
                         </div>
                         <button id="lawyer-button" onClick={handleLawyerButtonClick}>
-                            律師
+                            {gender === 'boy' ? '兄弟' : gender === 'girl' ? '閨蜜' : '律師'}
                         </button>
                     </div>
                 </div>
