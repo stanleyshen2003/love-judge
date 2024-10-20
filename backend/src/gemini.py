@@ -44,10 +44,10 @@ class Gemini:
             [query],
             generation_config=self.generation_config,
             safety_settings=self.safety_settings
-        ).candidates[0].content.parts[0].text
+        ).candidates[0].content.parts[0].text.replace("*", "")
     
     def prompt_once(self, prompt):
-        return self.model.generate_content(prompt).candidates[0].content.parts[0].text
+        return self.model.generate_content(prompt).candidates[0].content.parts[0].text.replace("*", "")
     
 class Lawyer(Gemini):
     def __init__(self, system_instruction, project, location="asia-east1", model_name="gemini-1.5-flash-002", mode="chat"):
