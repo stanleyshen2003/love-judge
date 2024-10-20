@@ -138,6 +138,7 @@ function Chat() {
                             );
                         })}
                     </div>
+
                     <div className="input-section">
                         <div className="input-wrapper">
                             <input
@@ -155,7 +156,7 @@ function Chat() {
                             </button>
                         </div>
                         <button id="lawyer-button" onClick={handleLawyerButtonClick}>
-                            Lawyer
+                            律師
                         </button>
                     </div>
                 </div>

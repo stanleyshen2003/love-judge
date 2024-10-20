@@ -101,7 +101,6 @@ function LawyerChat() {
                 <div className="intro">
                     <h1>律師聊天室</h1>
                     <p>暢談你心中的不快</p>
-
                 </div>
 
                 <div className="chat-section">
@@ -156,11 +155,7 @@ function LawyerChat() {
                                 發送
                             </button>
                         </div>
-                        <button
-                            className="back-button"
-                            id="back-button"
-                            onClick={handleBack}
-                        >
+                        <button id="back-button" onClick={handleBack}>
                             返回
                         </button>
                     </div>
