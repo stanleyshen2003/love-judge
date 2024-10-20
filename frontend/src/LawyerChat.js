@@ -40,7 +40,7 @@ function LawyerChat() {
             .catch((error) => {
                 console.error('Error fetching messages:', error);
             });
-        }, []);
+    }, []);
 
 
     // 定期获取消息
@@ -96,14 +96,11 @@ function LawyerChat() {
 
     return (
         <div className="lawyer-chat">
-            <div className="header">
-                房間 ID: <span>{roomId}</span>
-            </div>
 
             <div className="container">
                 <div className="intro">
                     <h1>律師聊天室</h1>
-                    <p>與律師討論你的問題！</p>
+                    <p>暢談你心中的不快</p>
                     <p>
                         你好，<span>{username}</span>！
                     </p>

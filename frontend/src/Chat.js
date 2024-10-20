@@ -41,7 +41,7 @@ function Chat() {
             .catch((error) => {
                 console.error('Error fetching messages:', error);
             });
-        }, []);
+    }, []);
 
     // 定期获取消息
     useEffect(() => {
@@ -94,13 +94,11 @@ function Chat() {
 
     return (
         <div className="chat-container">
-            <div className="header">
-                戀愛裁判 - Love Judge ({username})
-            </div>
+
             <div className="content">
                 <div className="intro">
                     <h1>戀愛問題解決！</h1>
-                    <p>房間 ID: {roomId}</p>
+                    <p>說說你們的問題吧～</p>
                 </div>
                 {/* 聊天区域 */}
                 <div className="chat-section">
