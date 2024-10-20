@@ -101,9 +101,7 @@ function LawyerChat() {
                 <div className="intro">
                     <h1>律師聊天室</h1>
                     <p>暢談你心中的不快</p>
-                    <p>
-                        你好，<span>{username}</span>！
-                    </p>
+
                 </div>
 
                 <div className="chat-section">
