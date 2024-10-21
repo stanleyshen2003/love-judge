@@ -1,2 +1,2 @@
-Love Talk Corpus: projects/547929371633/locations/us-central1/ragCorpora/3746994889972252672
-Reconciliation Corpus: projects/547929371633/locations/us-central1/ragCorpora/5476377146882523136
+Love Talk Corpus: projects/436403446768/locations/us-central1/ragCorpora/3379951520341557248
+Reconciliation Corpus: projects/436403446768/locations/us-central1/ragCorpora/6838716034162098176

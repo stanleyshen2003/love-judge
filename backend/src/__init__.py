@@ -2,7 +2,7 @@ import os
 import vertexai
 from vertexai.preview import rag
 
-PROJECT_ID = "semiotic-effort-439102-k9"
+PROJECT_ID = "tw-rd-tam-jameslu"
 LOCATION = os.environ.get("GOOGLE_CLOUD_REGION", "us-central1")
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 EMBEDDING_MODEL = "publishers/google/models/text-embedding-004"
