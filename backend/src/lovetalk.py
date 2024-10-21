@@ -4,7 +4,7 @@ from vertexai.preview import rag
 import vertexai
 import time
 
-class SaoTalkAgent:
+class LoveTalkAgent:
     def __init__(self, project_id, location='asia-east1'):
         self.project_id = project_id
         self.location = location or os.environ.get("GOOGLE_CLOUD_REGION", "us-central1")
@@ -51,7 +51,7 @@ RAG Love Talk Agent System Instruction
 
 輸出格式
 請按以下格式提供情話回應:
-Copy情感解讀：
+情感解讀：
 [簡要描述用戶當前的情感狀態]
                                 
 情感需求：
@@ -87,7 +87,7 @@ Copy情感解讀：
 
 def test_love_talk_agent():
     project_id = "tw-rd-tam-jameslu"  # 请替换为你的实际项目ID
-    agent = SaoTalkAgent(project_id=project_id)
+    agent = LoveTalkAgent(project_id=project_id)
 
     print("Testing LovaTalkAgent...")
     test_cases = [
