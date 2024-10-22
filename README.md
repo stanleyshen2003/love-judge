@@ -34,7 +34,7 @@
 ## 🎬 使用展示
 
 ### 1️⃣ AI 情緒轉換器
-![image](https://hackmd.io/_uploads/H1XapVBxJe.png)
+![image](./image/court_flow.png)
 
 > 右側展示男方原始發言，左側顯示女方看到經 AI 轉換後的理性表達
 - 自動識別情緒化語言
