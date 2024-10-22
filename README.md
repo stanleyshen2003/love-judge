@@ -1,13 +1,3 @@
-# love-judge
-
-### Quick reminder
-Remember to pull before you push!
-Try not to work in the same folder!
-Commands
-1. git add .
-2. git commit -m "<some_name>"
-3. git pull
-4. git push
 # 戀愛法官 AI 平台 💕⚖️
 
 [![Hackathon Project](https://img.shields.io/badge/Hackathon-Project-blue)](#) 
