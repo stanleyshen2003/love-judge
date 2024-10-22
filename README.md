@@ -43,7 +43,7 @@
 - 確保溝通更具建設性
 
 ### 2️⃣ 法官引導討論
-![image](https://hackmd.io/_uploads/B1vJ0NHlJe.png)
+![image](./image/demo_1.png)
 
 > AI 法官即時整理雙方觀點，並引導深入討論
 - 摘要重點論述
@@ -52,7 +52,7 @@
 - 提供下一步討論方向
 
 ### 3️⃣ 和解方案制定
-![image](https://hackmd.io/_uploads/r1BfCEHxJe.png)
+![image](./image/demo_2.png)
 
 > 基於雙方共識，提供具體可行的和解方案
 - 分析討論要點
@@ -61,7 +61,7 @@
 - 制定具體執行建議
 
 ## 📝 使用流程
-![image](https://hackmd.io/_uploads/H1tYfSHxyg.png)
+![image](./image/demo_2.png)
 
 1. **創建對話空間**
    - 雙方同意進入對話
